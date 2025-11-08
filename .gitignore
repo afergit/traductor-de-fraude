@@ -1,0 +1,34 @@
+# === Entornos Virtuales ===
+# Ignora la carpeta del entorno virtual
+.venv/
+venv/
+env/
+.env/
+
+# === Archivos de Secretos ===
+# ¡NUNCA subas tus API Keys o contraseñas!
+.env
+*.env
+secrets.toml
+
+# === Cache de Python ===
+# Ignora los archivos de bytecode y cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Archivos de IDE/Editor ===
+# Ignora la configuración local de VS Code
+.vscode/
+# Ignora la configuración local de PyCharm
+.idea/
+
+# === Archivos de Pruebas ===
+.pytest_cache/
+.coverage
+htmlcov/
+
+# === Archivos de Sistema Operativo ===
+.DS_Store
+Thumbs.db
