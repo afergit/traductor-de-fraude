@@ -4,34 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detector de Fraude</title>
-    
+
     <link rel="stylesheet" href="frontend/features/components/bubble-chat/bubble-chat.component.css">
     <link rel="stylesheet" href="frontend/features/components/buttons/send-button.component.css">
     <link rel="stylesheet" href="frontend/features/layout/sidebar.component.css">
     
     <style>
         body {
-            /* Asegura que el popup tenga un tamaño visible */
-            width: 400px;
+            /* Aseguramos el tamaño que espera la extensión */
+            width: 360px; /* Tamaño más común para sidebars */
             height: 500px;
             margin: 0;
-            display: flex;
-            flex-direction: column;
+            padding: 0;
+            overflow: hidden; /* Evita barras de scroll externas */
         }
-        /* Añade cualquier CSS global que falte para visibilidad */
+        /* Corregimos el flexbox para que el sidebar ocupe todo el cuerpo */
+        .sidebar {
+            width: 100%;
+            height: 100%;
+        }
+        /* Arreglo para que el input no se desborde */
+        .input-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px; /* Padding para que coincida con el sidebar */
+            border-top: 1px solid rgba(0,179,255,0.08); /* Separador visual */
+        }
+        #message-input {
+            flex-grow: 1;
+            box-sizing: border-box; /* Asegura padding interno */
+        }
     </style>
 </head>
 <body>
 
-    <div id="bubble-messages" style="flex-grow: 1; overflow-y: auto;">
-        </div>
+    <aside class="sidebar">
+        <header class="sidebar__header">
+            <h1 class="sidebar__title">Traductor de Fraude</h1>
+            <div class="sidebar__icon">
+                <img src="icon.png" alt="Icono Traductor de Fraude">
+            </div>
+        </header>
 
-    <div id="sidebar-container" style="padding: 10px; display: flex;">
-        <textarea id="message-input" placeholder="Pega el texto o enlace aquí..." style="flex-grow: 1;"></textarea>
-        <button id="send-button">
-            <span>Enviar</span>
-        </button>
-    </div>
+        <main class="sidebar__main">
+            <div id="bubble-messages" class="messages" role="log" aria-live="polite">
+                </div>
+
+            <div class="input-wrap">
+                <div class="input-area">
+                    <textarea id="message-input" class="message-input" placeholder="Pega el texto o enlace aquí..." rows="1"></textarea>
+                    
+                    <button type="button" class="send-btn" id="send-button">
+                        <span>Enviar</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </aside>
 
     <script src="frontend/features/components/bubble-chat/bubble-chat.component.js"></script>
     <script src="frontend/features/components/buttons/send-button.component.js"></script>

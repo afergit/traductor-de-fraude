@@ -13,7 +13,7 @@
         // Dispatch a custom event so other parts of the app can react
         const ev = new CustomEvent('message:send', { detail: { text }, bubbles:true });
         
-        // Disparamos el evento desde 'document'
+        // Disparamos el evento desde 'document' para que el bubble-chat lo escuche
         document.dispatchEvent(ev);
 
         // After the very first successful send, shrink the textarea to 1/3 of initial height
@@ -27,13 +27,13 @@
         textarea.focus();
     }
 
-    // --- ¡LA SOLUCIÓN AL BOTÓN VA AQUÍ! ---
-    // Eliminamos el listener de 'click' que fallaba. Usamos 'pointerdown' que es más directo.
+    // --- CÓDIGO CORREGIDO PARA EL BOTÓN ---
+    // Eliminamos el listener de 'click' y usamos 'pointerdown' para evitar conflictos.
     sendButton.addEventListener('pointerdown', (e) => {
-        e.preventDefault(); // IMPORTANTE: Detiene cualquier otro comportamiento que bloquee el envío
+        e.preventDefault(); // Detiene cualquier otro comportamiento del botón que bloquee el envío
         sendMessage();
     });
-    // --- FIN DE LA SOLUCIÓN ---
+    // --- FIN DEL CÓDIGO CORREGIDO ---
 
 
     // Modificamos la escucha del teclado para que Enter envíe el mensaje (sin Ctrl/Meta)
