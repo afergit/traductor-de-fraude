@@ -1,0 +1,33 @@
+<aside class="sidebar">
+	<header class="sidebar__header">
+		<h1 class="sidebar__title">Traductor de Fraude</h1>
+		<!-- circular icon below the title; path is relative to the page that will load this fragment (popup.html) -->
+		<div class="sidebar__icon">
+			<img src="icons/icon128.png" alt="Icono Traductor de Fraude">
+		</div>
+	</header>
+
+	<main class="sidebar__main">
+		<!-- Bubble chat will be injected here when the containing page loads -->
+		<div id="bubble-placeholder" class="bubble-placeholder"></div>
+
+		<!-- input wrapper reserves the vertical space so shrinking the textarea does not move the footer -->
+		<div class="input-wrap">
+			<label for="message-input" class="visually-hidden">Texto a enviar</label>
+			<textarea id="message-input" class="message-input" placeholder="Escribe tu texto aquí..." rows="3"></textarea>
+		</div>
+	</main>
+
+	<footer class="sidebar__footer">
+		<div class="controls">
+			<!-- The send button uses the shared .send-btn class so the JS can bind to it -->
+			<button type="button" class="send-btn" id="send-button">Enviar</button>
+		</div>
+	</footer>
+</aside>
+
+<!-- Small accessibility helper -->
+<style>
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+</style>
+

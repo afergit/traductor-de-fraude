@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traductor de Fraude</title>
+  <link rel="stylesheet" href="popup.css">
+  <!-- App styles (loaded in popup for the live-demo) -->
+  <link rel="stylesheet" href="../frontend/features/layout/sidebar.component.css">
+  <link rel="stylesheet" href="../frontend/features/components/bubble-chat/bubble-chat.component.css">
+  <link rel="stylesheet" href="../frontend/features/components/buttons/send-button.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- sidebar + bubble-chat will be loaded into this container by loader script -->
+  </div>
+
+  <script>
+    // Loader: fetch sidebar HTML, inject into .container, then inject bubble-chat HTML into placeholder
+    (async function () {
+      const container = document.querySelector('.container');
+      if (!container) return;
+
+      try {
+        // load and insert sidebar HTML
+        const sidebarResp = await fetch('../frontend/features/layout/sidebar.component.html');
+        const sidebarHtml = await sidebarResp.text();
+        container.innerHTML = sidebarHtml;
+
+        // load bubble-chat and inject into placeholder if present
+        const placeholder = document.getElementById('bubble-placeholder');
+        if (placeholder) {
+          const chatResp = await fetch('../frontend/features/components/bubble-chat/bubble-chat.component.html');
+          const chatHtml = await chatResp.text();
+          placeholder.innerHTML = chatHtml;
+        }
+
+        // dynamically load component scripts (order matters: button, bubble-chat, sidebar)
+        const scripts = [
+          '../frontend/features/components/buttons/send-button.component.js',
+          '../frontend/features/components/bubble-chat/bubble-chat.component.js',
+          '../frontend/features/layout/sidebar.component.js'
+        ];
+
+        for (const src of scripts) {
+          await new Promise((res, rej) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.defer = false;
+            s.onload = res;
+            s.onerror = () => rej(new Error('Failed to load ' + src));
+            document.body.appendChild(s);
+          });
+        }
+
+      } catch (err) {
+        console.error('Failed to load UI components', err);
+        container.innerHTML = '<pre style="color:tomato">Error cargando la interfaz. Revisa la consola.</pre>';
+      }
+    })();
+  </script>
+  <script src="popup.js"></script>
+</body> 
+</html>
