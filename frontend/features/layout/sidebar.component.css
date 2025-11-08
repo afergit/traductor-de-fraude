@@ -1,0 +1,127 @@
+:root{
+	--bg:#000000;
+	--neon:#00b3ff;
+	--neon-2:#3fe0ff;
+}
+
+.sidebar{
+	width:360px;
+	height:100vh;
+	background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(3,3,3,1) 100%);
+	color:var(--neon-2);
+	box-sizing:border-box;
+	padding:16px;
+	border-right:2px solid rgba(0,179,255,0.08);
+	box-shadow: inset 0 0 30px rgba(0,179,255,0.02), 0 0 24px rgba(0,179,255,0.06);
+	display:flex;
+	flex-direction:column;
+	border-radius:12px; /* rounded corners */
+	overflow:hidden; /* clip inner content to rounded corners */
+}
+
+.sidebar__header{padding-bottom:12px}
+
+.sidebar__header{
+	padding-bottom:12px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.sidebar__title{
+	font-size:18px;
+	margin:0;
+	color:var(--neon);
+	text-shadow: 0 0 8px rgba(0,179,255,0.35);
+	text-align:center;
+}
+
+.sidebar__icon{
+	margin-top:10px;
+	width:64px;
+	height:64px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.sidebar__icon img{
+	width:100%;
+	height:100%;
+	border-radius:50%;
+	object-fit:cover;
+	box-shadow:0 4px 18px rgba(0,179,255,0.12), inset 0 0 8px rgba(0,179,255,0.03);
+	border:2px solid rgba(0,179,255,0.06);
+}
+
+.sidebar__main{flex:1; padding-bottom:18px; display:flex; flex-direction:column; min-height:0;} /* make main a column flex so placeholder can flex; min-height:0 allows children to scroll */
+
+.input-wrap{
+	/* reserve the vertical space so shrinking textarea doesn't push footer */
+	--input-height: 140px;
+	height: var(--input-height);
+	box-sizing:border-box;
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-start; /* keep textarea at top of wrapper */
+	margin-bottom:6px; /* small gap above footer */
+	flex:0 0 auto; /* do not grow or shrink */
+}
+
+/* bubble-placeholder will contain the chat and should take available space above the input */
+.bubble-placeholder{
+	flex:1 1 auto;
+	min-height:0; /* crucial for flex children overflow to work */
+	display:flex;
+}
+
+.message-input{
+    display:flex;
+	width:90%;
+	height:100%; /* fills wrapper by default */
+	resize: none; /* user cannot resize; controlled by script */
+	background:transparent;
+	border:2px solid rgba(0,179,255,0.16);
+	color:var(--neon-2);
+	padding:12px;
+	border-radius:8px;
+	outline:none;
+	box-shadow: inset 0 0 20px rgba(0,179,255,0.02);
+	font-size:14px;
+	transition: height 220ms ease; /* animate inner textarea height only */
+}
+.message-input::placeholder{color:rgba(63,224,255,0.22)}
+.message-input:focus{
+	border-color:var(--neon);
+	box-shadow:0 0 18px rgba(0,179,255,0.35);
+}
+
+.sidebar__footer{padding-top:12px}
+.controls{display:flex;justify-content:flex-end}
+
+/* send button will be styled here as well so including files can share styles */
+.send-btn{
+	background:transparent;
+	color:var(--neon-2);
+	border:2px solid rgba(0,179,255,0.22);
+	padding:10px 16px;
+	border-radius:10px;
+	cursor:pointer;
+	font-weight:600;
+	text-transform:uppercase;
+	letter-spacing:0.6px;
+	transition:all 160ms ease;
+	box-shadow: 0 0 12px rgba(0,179,255,0.06);
+}
+.send-btn:hover{
+	transform:translateY(-2px);
+	border-color:var(--neon-2);
+	box-shadow:0 0 24px rgba(0,179,255,0.45);
+}
+.send-btn:active{transform:translateY(0)}
+
+/* when the textarea has been used once, make it 1/3 of its original height */
+.message-input.shrunk{
+	/* visually reduce the textarea height while the wrapper keeps original space
+	   so footer does not move. The extra space remains below the textarea. */
+	height: calc(var(--input-height) / 1.2);
+}
+
