@@ -21,19 +21,19 @@ Eres un motor de análisis de ciberseguridad especializado en detectar estafas (
 Tu misión es analizar el texto y la información del enlace proporcionada, y determinar si es un intento de fraude.
 
 **Reglas de Análisis:**
-1.  **Detecta Tácticas de Miedo y Urgencia:** Busca frases como "cuenta suspendida", "acción inmediata requerida", "ganaste un premio", "última oportunidad".
-2.  **Detecta Suplantación de Autoridad:** ¿Finge ser un banco (BBVA, BCP), una entidad gubernamental (SUNAT), o un servicio popular (Netflix, Google, Microsoft)?
-3.  **Analiza el Enlace:** Compara la `url_original` con la `url_final`. ¿Redirige a un dominio inesperado? ¿La `url_final` NO es HTTPS (`es_seguro_httpss`: false)? Esto es una señal de alerta máxima.
-4.  **Evalúa el Tono:** Busca errores gramaticales, saludos genéricos ("Estimado usuario") o un tono excesivamente informal o alarmista.
+1.  Detecta Tácticas de Miedo y Urgencia: Busca frases como "cuenta suspendida", "acción inmediata requerida", "ganaste un premio", "última oportunidad".
+2.  Detecta Suplantación de Autoridad: ¿Finge ser un banco (BBVA, BCP), una entidad gubernamental (SUNAT), o un servicio popular (Netflix, Google, Microsoft)?
+3.  Analiza el Enlace: Compara la `url_original` con la `url_final`. ¿Redirige a un dominio inesperado? ¿La `url_final` NO es HTTPS (`es_seguro_httpss`: false)? Esto es una señal de alerta máxima.
+4.  Evalúa el Tono: Busca errores gramaticales, saludos genéricos ("Estimado usuario") o un tono excesivamente informal o alarmista.
 
 **Formato de Salida Obligatorio:**
 Tu respuesta DEBE SER ÚNICAMENTE un objeto JSON válido, sin ningún texto introductorio, explicaciones adicionales o markdown (como ```json).
-Usa EXACTAMENTE la siguiente estructura:
+Usa EXACTAMENTE la siguiente estructura (coincidiendo con schemas.py):
 
 {
-  "es_fraude": "<boolean>",
-  "titulo": "<Un título claro y alarmante si es fraude. Ej: '¡Peligro! Esto es una Estafa'>",
-  "explicacion_simple": "<Explicación breve y clara del porqué. Ej: 'Están fingiendo ser tu banco para robar tu clave.'>",
+  "es_fraude": <boolean>,
+  "titulo": "<Un título claro y alarmante si es fraude, o tranquilizador si es seguro. Ej: '¡Peligro! Esto es una Estafa' o 'Mensaje Seguro'>",
+  "explicacion_simple": "<Explicación breve y clara del porqué, enfocada en el usuario no técnico. Ej: 'Están fingiendo ser tu banco para robar tu clave.'>",
   "tacticas_detectadas": ["<Táctica 1>", "<Táctica 2>", ...]
 }
 """
@@ -59,7 +59,7 @@ async def investigar_enlace_async(url: str, client: httpx.AsyncClient) -> dict:
     resultado = {
         "url_original": url,
         "url_final": url,
-        "es_seguro_httpsO": False, # Corregido (tenía 'httpsO' en el plan original)
+        "es_seguro_httpsOgit add app/agente_fraude.py": False, # Corregido (tenía 'httpsO' en el plan original)
         "accesible": False,
         "error": None
     }
@@ -192,4 +192,3 @@ async def analizar_texto_fraude(texto_recibido: str) -> dict:
             "elementos_detectados": ["Error de Análisis"],
             "info_enlace": info_enlace
         }
-
