@@ -69,7 +69,7 @@ async def investigar_enlace_async(url: str, client: httpx.AsyncClient) -> dict:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         
-        response = await client.get(url, allow_redirects=True, timeout=5.0, headers=headers)
+        response = await client.get(url, follow_redirects=True, timeout=5.0, headers=headers)
         
         response.raise_for_status() # Lanza excepción para 4xx/5xx
         
