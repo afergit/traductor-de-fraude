@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector de Fraude</title>
+    <link rel="stylesheet" href="frontend/features/components/bubble-chat/bubble-chat.component.css">
+    <link rel="stylesheet" href="frontend/features/components/buttons/send-button.component.css">
+    <link rel="stylesheet" href="frontend/features/components/layout/sidebar.component.css">
+    
+    <style>
+        body {
+            width: 400px;
+            height: 500px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Tus propios archivos CSS de layout se encargarán del resto */
+    </style>
+</head>
+<body>
+
+    <div id="bubble-messages" style="flex-grow: 1; overflow-y: auto;">
+        </div>
+
+    <div id="sidebar-container">
+        <textarea id="message-input" placeholder="Pega el texto o enlace aquí..."></textarea>
+        <button id="send-button">
+            <span>Enviar</span>
+        </button>
+    </div>
+
+    <script src="frontend/features/components/bubble-chat/bubble-chat.component.js"></script>
+    <script src="frontend/features/components/buttons/send-button.component.js"></script>
+    <script src="frontend/features/components/layout/sidebar.component.js"></script>
+
+</body>
+</html>
