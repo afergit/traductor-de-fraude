@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     ENV: str = "dev"
     ALLOW_ORIGINS: str = "*" 
     PORT: int = 8000
-    IA_API_KEY: str | None = None
+    GEMINI_API_KEY: str | None = None
 
     class Config:
         env_file = ".env"
