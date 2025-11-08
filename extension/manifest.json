@@ -7,7 +7,7 @@
     "activeTab"
   ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "sidebar.component.html",
     "default_icon": {
       "128": "icons/icon128.png"
     }

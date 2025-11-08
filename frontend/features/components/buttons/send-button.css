@@ -1,0 +1,11 @@
+/* Shared neon button styling (kept minimal since the sidebar also includes styles) */
+.send-btn{
+	background:transparent;
+	border:2px solid rgba(0,179,255,0.16);
+	color:var(--neon-2, #3fe0ff);
+	padding:8px 14px;
+	border-radius:10px;
+	cursor:pointer;
+}
+
+.send-btn:hover{border-color:var(--neon, #00b3ff); box-shadow:0 0 20px rgba(0,179,255,0.28)}

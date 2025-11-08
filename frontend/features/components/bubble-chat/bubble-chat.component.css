@@ -1,0 +1,76 @@
+:root{
+	--bg:#000;
+	--neon:#00b3ff;
+	--neon-2:#3fe0ff;
+	--muted:rgba(63,224,255,0.12);
+}
+
+.bubble-chat{
+	box-sizing:border-box;
+	padding:12px;
+	background:linear-gradient(180deg,#000 0%, #050505 100%);
+	color:var(--neon-2);
+	display:flex;
+	flex-direction:column;
+	width:100%;
+	/* allow this element to flex inside its placeholder parent */
+	flex:1 1 auto;
+	min-height:0;
+}
+
+.messages{
+	display:flex;
+	flex-direction:column;
+	gap:10px;
+	flex:1 1 auto; /* take remaining space inside bubble-chat */
+	overflow:auto;
+	padding-right:8px;
+}
+
+.bubble{
+	max-width:78%;
+	padding:10px 14px;
+	border-radius:14px;
+	position:relative;
+	font-size:14px;
+	line-height:1.3;
+	box-shadow:0 2px 18px rgba(0,179,255,0.04);
+	word-wrap:break-word;
+	animation:fadeInUp .18s ease;
+}
+
+.bubble.user{
+	align-self:flex-end;
+	background:linear-gradient(180deg, rgba(0,179,255,0.06), rgba(0,179,255,0.02));
+	border:1px solid rgba(0,179,255,0.12);
+	color:var(--neon-2);
+	text-align:right;
+}
+
+.bubble.bot{
+	align-self:flex-start;
+	background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	border:1px solid rgba(63,224,255,0.06);
+	color:var(--neon-2);
+}
+
+.bubble .meta{
+	display:block;
+	font-size:11px;
+	color:var(--muted);
+	margin-top:8px;
+	opacity:0.9;
+}
+
+/* subtle timestamp placed under message */
+.bubble small{display:block;margin-top:6px;color:var(--muted);font-size:11px}
+
+/* scroll bar styling for neon theme */
+.messages::-webkit-scrollbar{width:10px}
+.messages::-webkit-scrollbar-track{background:transparent}
+.messages::-webkit-scrollbar-thumb{background:rgba(63,224,255,0.06);border-radius:6px}
+
+@keyframes fadeInUp{
+	from{opacity:0;transform:translateY(6px)}
+	to{opacity:1;transform:translateY(0)}
+}

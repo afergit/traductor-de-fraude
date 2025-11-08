@@ -1,34 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.config import Settings, get_cors_origins
+from app.routers import analyzer
 
-app = FastAPI(title="Traductor de Fraude API")
+def create_app() -> FastAPI:
+    cfg = Settings()
+    app = FastAPI(
+        title="Detector de fraude",
+        version="1.0",
+        description="API para analizar un enlace (HTTP→HTTPS y certificado SSL)"
+    )
 
-# Configurar CORS para permitir peticiones desde la extensión Chrome
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=get_cors_origins(cfg),
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    app.include_router(analyzer.router)
+    return app
 
-@app.get("/")
-async def root():
-    return {"message": "Traductor de Fraude API - Activo"}
-
-@app.get("/health")
-async def health():
-    return {"status": "healthy"}
-
-@app.post("/analizar")
-async def analizar_fraude(texto: str):
-    """
-    Endpoint para analizar texto y detectar patrones de fraude
-    """
-    # TODO: Implementar lógica de detección de fraude
-    return {
-        "texto": texto,
-        "es_fraude": False,
-        "confianza": 0.0,
-        "patrones_detectados": []
-    }
+app = create_app()
