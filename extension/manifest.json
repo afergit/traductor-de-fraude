@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Traductor de Fraude",
+  "version": "1.0.0",
+  "description": "Extensión Chrome para detectar y traducir patrones de fraude",
+  "permissions": [
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "sidebar.component.html",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
