@@ -1,10 +1,16 @@
+from dotenv import load_dotenv
+
+# Carga el .env ANTES que cualquier otra cosa
+load_dotenv()
+
+# Ahora sí, importa el resto de tu app
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import Settings, get_cors_origins
 from app.routers import analyzer
 
 def create_app() -> FastAPI:
-    cfg = Settings()
+    cfg = Settings() # Esta línea ahora funcionará
     app = FastAPI(
         title="Detector de fraude",
         version="1.0",
