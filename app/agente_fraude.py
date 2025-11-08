@@ -31,10 +31,10 @@ Tu respuesta DEBE SER ÚNICAMENTE un objeto JSON válido, sin ningún texto intr
 Usa EXACTAMENTE la siguiente estructura:
 
 {
-  "es_fraude": <boolean>,
-  "nivel_riesgo": <"Alto", "Medio", "Bajo" o "Nulo">,
-  "justificacion": "<Explicación breve y clara del porqué, enfocada en el usuario no técnico>",
-  "elementos_detectados": ["<Táctica 1>", "<Táctica 2>", ...]
+  "es_fraude": "<boolean>",
+  "titulo": "<Un título claro y alarmante si es fraude. Ej: '¡Peligro! Esto es una Estafa'>",
+  "explicacion_simple": "<Explicación breve y clara del porqué. Ej: 'Están fingiendo ser tu banco para robar tu clave.'>",
+  "tacticas_detectadas": ["<Táctica 1>", "<Táctica 2>", ...]
 }
 """
 
@@ -59,7 +59,7 @@ async def investigar_enlace_async(url: str, client: httpx.AsyncClient) -> dict:
     resultado = {
         "url_original": url,
         "url_final": url,
-        "es_seguro_httpss": False, # Corregido (tenía 'httpsO' en el plan original)
+        "es_seguro_httpsO": False, # Corregido (tenía 'httpsO' en el plan original)
         "accesible": False,
         "error": None
     }
